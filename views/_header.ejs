@@ -1,0 +1,14 @@
+<header>
+    <ul>
+        <% if(locals.user){ %>
+            <% if(locals.user.isAdmin) { %>
+                <li><a href="/dsf"><small>Assign Work</small></a></li>
+                <li><a href="/asdsf"><small>Add Employees</small></a></li>
+            <% } %>
+            <li><a style="background-color: red;color: white;text-decoration: none;" href="/users/signout">SignOut</a></li>
+        <% }else{ %>
+            <li><a href="/users/signup">SignUp</a></li>
+            <li><a href="/users/signin">SignIn</a></li>
+        <% } %>
+    </ul>
+</header>
