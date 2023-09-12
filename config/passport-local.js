@@ -50,6 +50,14 @@ passport.checkAuthentication = function(req,res,next){
     res.redirect('/users/signin')
 }
 
+passport.checkAdmin = function(req,res,next){
+    if(req.user.isAdmin){
+        console.log('check-admin')
+        return next()
+    }
+    res.redirect('/home/all')
+}
+
 
 passport.setAuthenticatedUser = function(req,res,next){
     if(req.isAuthenticated()){ //So effectively isAuthenticated should return true if req.user has been set to a non-null object and false if req.user is null or false or 0, etc.

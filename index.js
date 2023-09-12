@@ -30,7 +30,7 @@ app.use(session({
     saveUninitialized: false, //this is for when a request is called without any login then we don't need to save any cokkie
     resave: false, //this is for when a request comes do we need to reqwite the session cokkies everytime
     cookie: {
-        maxAge:(1000 * 60 )
+        maxAge:(1000 * 60 * 100)
     },
     store: new MongoStore( //this adds the session to DB
         {

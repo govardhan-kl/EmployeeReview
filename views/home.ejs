@@ -1,5 +1,36 @@
 <h1>welcome to home</h1>
 <% if(locals.user.isAdmin){ %> 
-    <p><%= locals.user.name %></p>
-    
+    <ul id="allUsers">
+        <% for (let user of users){ %>
+                <% if(user.email != "admin@admin.com"){ %>
+                    <li>
+                        <p><%= user.name %></p>
+                        <p><%= user.email %></p>
+                        <a href="/users/view/<%=user.id%>">View</a>
+                        <a href="/users/update/<%=user.id%>">Update</a>
+                        <a href="/users/addReview/<%=user.id%>">Add Review</a>
+                        <a href="/users/delete/<%=user.id%>">Delete</a>
+                    </li>
+                 <% } %>
+        <% } %>
+    </ul>
+<% } else { %>
+    <p>Content</p>
+    <p>Add Review</p>
+    <% for(let review of pendeningReviews){ %>
+        <div>
+            <p><%= review.ReviewTo.name %></p>
+            <form action="/home/update/<%=review.id%>" method="post">
+                <textarea name="content" id="content" cols="15" rows="10" Give a Review></textarea>
+                <input type="submit" value="Add Review">
+            </form>
+        </div>
+    <% } %>
+    <p>Your perofrmance review</p>
+    <% for(let review of Myreviews){ %>
+        <div>
+            <p><%= review.content %></p>
+            <p><%= review.ReviewBy.name %></p>
+        </div>
+    <% } %>
 <% } %>

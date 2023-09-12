@@ -2,10 +2,12 @@
     <ul>
         <% if(locals.user){ %>
             <% if(locals.user.isAdmin) { %>
-                <li><a href="/dsf"><small>Assign Work</small></a></li>
-                <li><a href="/asdsf"><small>Add Employees</small></a></li>
+                <li><a href="/home/all"><small>Home</small></a></li>
+                <li><a href="/home/assign-work"><small>Assign Work</small></a></li>
+                <li><a href="/home/add-employees"><small>Add Employees</small></a></li>
             <% } %>
-            <li><a style="background-color: red;color: white;text-decoration: none;" href="/users/signout">SignOut</a></li>
+            <p><%= locals.user.name %></p>
+            <li><a href="/users/signout">SignOut</a></li>
         <% }else{ %>
             <li><a href="/users/signup">SignUp</a></li>
             <li><a href="/users/signin">SignIn</a></li>
