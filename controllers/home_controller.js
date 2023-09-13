@@ -36,7 +36,17 @@ module.exports.assign_work = async function(req,res){
 //This is for admin to make employess give review
 module.exports.create = async function(req,res){
     try{
-        console.log(req.body);
+        console.log(req.body)
+        if(req.body.content){
+            await PerformanceData.create({
+                ReviewTo:req.body.ReviewTo,
+                content:req.body.content,
+                ReviewBy:req.body.ReviewBy,
+                isReviewed:true
+            })
+
+            return res.redirect('back')
+        }
         await PerformanceData.create({
             ReviewTo:req.body.ReviewTo,
             ReviewBy:req.body.ReviewBy,

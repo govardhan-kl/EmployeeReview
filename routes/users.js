@@ -11,6 +11,8 @@ router.post('/login',passport.authenticate(
     'local',
     {failureRedirect:'/users/signin'},
 ) , user_controller.login);
-router.get('/signout', user_controller.destroySession)
+
+router.get('/addReview/:id',passport.checkAuthentication, passport.checkAdmin, user_controller.add_review);
+router.get('/signout', user_controller.destroySession);
 
 module.exports = router

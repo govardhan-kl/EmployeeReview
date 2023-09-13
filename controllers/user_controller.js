@@ -1,4 +1,5 @@
 const User = require('../models/users');
+const PerformanceData = require('../models/perormanceData');
 
 module.exports.signIn = function(req,res){
     if(req.isAuthenticated()){
@@ -63,4 +64,15 @@ module.exports.destroySession = function(req,res){
         if (err) { return next(err); }
         res.redirect('/users/signin');
       });
+}
+
+
+module.exports.add_review = async function(req,res){
+    let userReviews = await PerformanceData.find({ReviewTo:req.params.id,isReviewed:true}).sort('-createdAt').populate('ReviewTo').populate('ReviewBy');
+    let username = await User.findById(req.params.id);
+    res.render('home_addreview',{
+        title:"addreview/update",
+        userReviews,
+        username
+    })
 }

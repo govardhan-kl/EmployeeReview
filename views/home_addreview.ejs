@@ -1,0 +1,18 @@
+<p>Give a Performance review to <b><%= username.name %></b></p>
+<form action="/home/assign-work/create" method="post">
+    <input type="hidden" name="ReviewTo" value="<%=username._id%>"  hidden>
+    <input type="hidden" name="ReviewBy" value="<%=locals.user._id%>"  hidden>
+    <textarea name="content" id="content" cols="30" rows="4" placeholder="Give a review"></textarea>
+    <input type="submit" value="Add Review">
+</form>
+
+<div>
+    <p>Other Performance Reviews</p>
+    <% for(let review of userReviews) { %>
+        <form action="/home/update/<%=review.id%>" method="post">
+            <textarea name="content" id="content" cols="30" rows="4" ><%=review.content%></textarea>
+            <p><%=review.ReviewBy.name %></p>
+            <input type="submit" value="Update/Edit Review">
+        </form>
+    <% } %>
+</div>
