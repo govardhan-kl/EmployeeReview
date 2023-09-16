@@ -46,6 +46,9 @@ module.exports.create = async function(req,res){
                 isAdmin:false,
             })
         }
+        if(req.user){
+            if(req.user.isAdmin){return res.redirect('back')}
+        }
         res.redirect('/users/signin')
     }catch(err){
         console.log(`Eror in creating user : ${err}`);
@@ -75,4 +78,23 @@ module.exports.add_review = async function(req,res){
         userReviews,
         username
     })
+}
+
+// this is to update employees by admins
+module.exports.updateUser = async function(req,res){
+    let user = await User.findById(req.params.id);
+    user.name = req.body.name;
+    user.email = req.body.email;
+    user.isAdmin = req.body.isAdmin;
+    user.password = req.body.password;
+    user.save()
+    // console.log(req.body);
+    res.redirect('back');
+}
+
+//This is to delete the user by admin and will also delete respective reviews by that user
+module.exports.deleteuser = async function(req,res){
+    await User.findByIdAndDelete(req.params.id)
+    await PerformanceData.deleteMany({$or:[{ReviewBy:req.params.id},{ReviewTo:req.params.id}] })
+    res.redirect('back')
 }

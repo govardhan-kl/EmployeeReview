@@ -67,3 +67,10 @@ module.exports.update = async function(req,res){
     performance.save()
     res.redirect('back')
 }
+
+//this is to view employee details by Admin
+module.exports.addEmployes = function(req,res){
+    res.render('home_addemployes',{
+        title:'addEmploye'
+    })
+}

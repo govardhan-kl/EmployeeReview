@@ -1,4 +1,6 @@
-<h1>welcome to home</h1>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+<h1>Employee Review System</h1>
 <% if(locals.user.isAdmin){ %> 
     <ul id="allUsers">
         <% for (let user of users){ %>
@@ -6,10 +8,62 @@
                     <li>
                         <p><%= user.name %></p>
                         <p><%= user.email %></p>
-                        <a href="/users/view/<%=user.id%>">View</a>
-                        <a href="/users/update/<%=user.id%>">Update</a>
-                        <a href="/users/addReview/<%=user.id%>">Add Review/Update</a>
-                        <a href="/users/delete/<%=user.id%>">Delete</a>
+                        <!-- strat modal -->
+                        <!-- Button trigger modal -->
+                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#<%=user.id%>">
+                            View/Update
+                        </button>
+                        
+                        <!-- Modal -->
+                        <div class="modal fade" id="<%=user.id%>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h1 class="modal-title fs-5" id="exampleModalLabel">User Details</h1>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form action="/users/update/<%=user.id%>" id="<%=user.id%>" method="post">
+                                            <div>
+                                                <label for="name">Name</label>
+                                                <input type="text" id="name" name="name" value="<%= user.name %>">
+                                            </div>
+                                            <div>
+                                                <label for="email">Email</label>
+                                                <input type="email" id="email" name="email" value="<%= user.email %>">
+                                            </div>
+                                            <div>
+                                                <label for="isAdmin">IsAdmin</label>
+                                                <select name="isAdmin" id="isAdmin">
+                                                    <option value="<%=user.isAdmin%>" selected><%=user.isAdmin%></option>
+                                                    <option value="<%= !user.isAdmin%>"><%=!user.isAdmin%></option>
+                                                </select>
+                                            </div>
+                                            <div>
+                                                <label for="password">Password</label>
+                                                <input type="text" id="password" name="password" value="<%=user.password%>">
+                                            </div>
+                                            <input type="submit" name="" id="" class="btn btn-primary" value="Update/Save">
+                                        </form>
+                                    </div>
+                                    <!-- <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                        <button type="submit" class="btn btn-primary" form="<%=user.id%>">Save changes</button>
+                                    </div> -->
+                                </div>
+                            </div>
+                        </div>
+                        <!-- end modal -->
+                        <a href="/users/addReview/<%=user.id%>">
+                            <button type="button" class="btn btn-primary">
+                                Add Review/Update
+                            </button>
+                        </a>
+                        <a href="/users/delete/<%=user.id%>">
+                            <button type="button" class="btn btn-danger">
+                                Delete
+                            </button>
+                        </a>
                     </li>
                  <% } %>
         <% } %>
