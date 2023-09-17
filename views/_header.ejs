@@ -1,16 +1,21 @@
 <header>
-    <ul>
+    <div>
+        <img src="/images/epr.png" alt="ers_logo" width="60px" height="60px">
+    </div>
+    <div style="padding-bottom: 15px;">
+    <ul id="navbar">
         <% if(locals.user){ %>
-            <% if(locals.user.isAdmin) { %>
-                <li><a href="/home/all"><small>Home</small></a></li>
-                <li><a href="/home/assign-work"><small>Assign Work</small></a></li>
-                <li><a href="/home/add-employees"><small>Add Employees</small></a></li>
-            <% } %>
-            <p><%= locals.user.name %></p>
             <li><a href="/users/signout">SignOut</a></li>
+            <li><p><i class="fa-solid fa-user fa-beat"></i>&nbsp;<%= locals.user.name %></p></li>
+            <% if(locals.user.isAdmin) { %>
+                <li><a href="/home/add-employees">Add Employees</a></li>
+                <li><a href="/home/assign-work">Assign Work</a></li>
+                <li><a href="/home/all">Home</a></li>
+            <% } %>
         <% }else{ %>
             <li><a href="/users/signup">SignUp</a></li>
             <li><a href="/users/signin">SignIn</a></li>
         <% } %>
     </ul>
+    </div>
 </header>

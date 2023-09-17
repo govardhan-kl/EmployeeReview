@@ -1,13 +1,16 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="/css/home_all.css">
 <h1>Employee Review System</h1>
 <% if(locals.user.isAdmin){ %> 
     <ul id="allUsers">
         <% for (let user of users){ %>
                 <% if(user.email != "admin@admin.com"){ %>
-                    <li>
-                        <p><%= user.name %></p>
-                        <p><%= user.email %></p>
+                    <li class="rounded">
+                        <div>
+                            <p><i class="fa-solid fa-user">&nbsp;</i><%= user.name %></p>
+                            <p><i class="fa-solid fa-envelope"></i>&nbsp;<%= user.email %></p>
+                        </div>
                         <!-- strat modal -->
                         <!-- Button trigger modal -->
                         <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#<%=user.id%>">
@@ -23,25 +26,25 @@
                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body">
-                                        <form action="/users/update/<%=user.id%>" id="<%=user.id%>" method="post">
+                                        <form class="modal-body-form" action="/users/update/<%=user.id%>" id="<%=user.id%>" method="post">
                                             <div>
-                                                <label for="name">Name</label>
-                                                <input type="text" id="name" name="name" value="<%= user.name %>">
+                                                <label for="name">Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:</label>
+                                                <input type="text" id="name" name="name" value="<%= user.name %>" required>
                                             </div>
                                             <div>
-                                                <label for="email">Email</label>
-                                                <input type="email" id="email" name="email" value="<%= user.email %>">
+                                                <label for="email">Email&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:</label>
+                                                <input type="email" id="email" name="email" value="<%= user.email %>" required>
                                             </div>
                                             <div>
-                                                <label for="isAdmin">IsAdmin</label>
-                                                <select name="isAdmin" id="isAdmin">
+                                                <label for="isAdmin">IsAdmin&nbsp;&nbsp;&nbsp;:</label>
+                                                <select name="isAdmin" id="isAdmin" required>
                                                     <option value="<%=user.isAdmin%>" selected><%=user.isAdmin%></option>
                                                     <option value="<%= !user.isAdmin%>"><%=!user.isAdmin%></option>
                                                 </select>
                                             </div>
                                             <div>
-                                                <label for="password">Password</label>
-                                                <input type="text" id="password" name="password" value="<%=user.password%>">
+                                                <label for="password">Password&nbsp;:</label>
+                                                <input type="text" id="password" name="password" value="<%=user.password%>" required>
                                             </div>
                                             <input type="submit" name="" id="" class="btn btn-primary" value="Update/Save">
                                         </form>
@@ -69,22 +72,25 @@
         <% } %>
     </ul>
 <% } else { %>
-    <p>Content</p>
-    <p>Add Review</p>
-    <% for(let review of pendeningReviews){ %>
-        <div>
-            <p><%= review.ReviewTo.name %></p>
-            <form action="/home/update/<%=review.id%>" method="post">
-                <textarea name="content" id="content" cols="15" rows="10" Give a Review></textarea>
-                <input type="submit" value="Add Review">
-            </form>
-        </div>
-    <% } %>
-    <p>Your perofrmance review</p>
-    <% for(let review of Myreviews){ %>
-        <div>
-            <p><%= review.content %></p>
-            <p><%= review.ReviewBy.name %></p>
-        </div>
-    <% } %>
+    <div class="pendingReviews">
+        <h3>Give  A Performance Review</h3>
+        <% for(let review of pendeningReviews){ %>
+            <div>
+                <p style="text-align: center;">Name:&nbsp;<b><%= review.ReviewTo.name %></b></p>
+                <form class="pendingReviews-form" action="/home/update/<%=review.id%>" method="post">
+                    <textarea name="content" id="content" cols="35" rows="2" placeholder="Give a Review"></textarea>
+                    <input type="submit" class="btn btn-primary" value="Add Review">
+                </form>
+            </div>
+        <% } %>
+    </div>
+    <div class="pendingReviews MyReviews">
+        <h3>Your Perofrmance Reviews</h3>
+        <% for(let review of Myreviews){ %>
+            <div class="MyReviews-details">
+                <p>Review:&nbsp;<i><%= review.content %></i></p>
+                <p>ReviewBy:&nbsp;<b><%= review.ReviewBy.name %></b></p>
+            </div>
+        <% } %>
+    </div>
 <% } %>

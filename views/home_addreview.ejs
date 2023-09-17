@@ -1,18 +1,22 @@
-<p>Give a Performance review to <b><%= username.name %></b></p>
-<form action="/home/assign-work/create" method="post">
-    <input type="hidden" name="ReviewTo" value="<%=username._id%>"  hidden>
-    <input type="hidden" name="ReviewBy" value="<%=locals.user._id%>"  hidden>
-    <textarea name="content" id="content" cols="30" rows="4" placeholder="Give a review"></textarea>
-    <input type="submit" value="Add Review">
-</form>
+<link rel="stylesheet" href="/css/home_addReview.css">
+<div class="adminReview">
+    <h4>Give a Performance review to <b><%= username.name %></b></h4>
+    <form action="/home/assign-work/create" method="post">
+        <input type="hidden" name="ReviewTo" value="<%=username._id%>"  hidden>
+        <input type="hidden" name="ReviewBy" value="<%=locals.user._id%>"  hidden>
+        <textarea name="content" id="content" cols="30" rows="4" placeholder="Give a review"></textarea>
+        <input type="submit" class="btn btn-primary" value="Add Review">
+    </form>
+</div>
 
-<div>
-    <p>Other Performance Reviews</p>
+
+<div class="adminReview">
+    <h4>Other Performance Reviews By Employees/Admin</h4>
     <% for(let review of userReviews) { %>
-        <form action="/home/update/<%=review.id%>" method="post">
-            <textarea name="content" id="content" cols="30" rows="4" ><%=review.content%></textarea>
-            <p><%=review.ReviewBy.name %></p>
-            <input type="submit" value="Update/Edit Review">
+        <form class="otherReviews" action="/home/update/<%=review.id%>" method="post">
+            <textarea name="content" id="content" cols="30" rows="2" ><%=review.content%></textarea>
+            <p>ReviewBy:&nbsp;<b><%=review.ReviewBy.name %></b></p>
+            <input type="submit" class="btn btn-primary" value="Update/Edit Review">
         </form>
     <% } %>
 </div>

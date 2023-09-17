@@ -1,9 +1,10 @@
 <h1><%= title %></h1>
-
-<form action="/users/create" method="POST">
-    <input type="text" name="name" placeholder="Enter username" required>
-    <input type="email" name="email" placeholder="Enter Email" required>
-    <input type="password" name="password" placeholder="Enter Password" required>
-    <input type="password" name="confirm_password" placeholder="Confirm Password" required>
-    <button type="submit">SignUp</button>
-</form>
+<div style="margin-top: 5%;">
+    <form class="signups" action="/users/create" method="POST">  
+        <input type="text" name="name" placeholder="Enter username" required>
+        <input type="email" name="email" placeholder="Enter Email" required>
+        <input type="password" name="password" placeholder="Enter Password" required>
+        <input type="password" name="confirm_password" placeholder="Confirm Password" required>
+        <button type="submit" class="btn btn-primary">SignUp</button>
+    </form>
+</div>

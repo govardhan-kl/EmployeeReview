@@ -1,0 +1,11 @@
+#assign-work{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 5% 25%;
+}
+
+#assign-work div{
+    width: 100%;
+    margin: 5px;
+}

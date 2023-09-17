@@ -6,7 +6,7 @@ module.exports.signIn = function(req,res){
         return res.redirect('/home/all')
     }
     res.render('user-signin',{
-        title:"Sign-In"
+        title:"ERS | Sign-In"
     })
 }
 
@@ -16,7 +16,7 @@ module.exports.signUp = function(req,res){
         return res.redirect('/home/all')
     }
     res.render('user-signup',{
-        title:"SignUp"
+        title:"ERS | SignUp"
     })
 }
 

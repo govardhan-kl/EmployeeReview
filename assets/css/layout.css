@@ -1,0 +1,53 @@
+body{
+    background-color: rgb(128, 24, 214);
+}
+header{
+    display: flex;
+    align-items: flex-end;
+    align-content: center;
+    justify-content: space-between;
+    padding: 10px 15px;
+    background-color: rgb(12, 180, 14);
+}
+
+
+#navbar{
+    list-style-type: none;
+    display: flex;
+    flex-direction:row-reverse;
+    margin: 0px;
+}
+
+#navbar li{
+    margin: 0% 10px;
+}
+
+h1{
+    text-align: center;
+}
+
+a{
+    text-decoration: none;
+    color: brown;
+}
+
+a:hover{
+    cursor: pointer;
+    text-decoration: underline;
+    text-shadow: 1px 1px 2px red;
+}
+
+.signups{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    flex-direction: column;
+    /* width: 85%; */
+}
+
+.signups input{
+    margin: 5px;
+    width: 30%;
+    height: 25px;
+}
