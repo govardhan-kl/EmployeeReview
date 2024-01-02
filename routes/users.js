@@ -12,6 +12,7 @@ router.post('/login',passport.authenticate(
     {failureRedirect:'/users/signin'},
 ) , user_controller.login);
 
+router.get('/filter',passport.checkAuthentication,passport.checkAdmin,user_controller.filterUsers);
 router.get('/addReview/:id',passport.checkAuthentication, passport.checkAdmin, user_controller.add_review);
 router.get('/signout', user_controller.destroySession);
 router.post('/update/:id',passport.checkAuthentication, passport.checkAdmin,user_controller.updateUser);

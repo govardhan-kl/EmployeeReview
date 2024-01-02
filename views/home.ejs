@@ -2,7 +2,11 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
 <link rel="stylesheet" href="/css/home_all.css">
 <h1>Employee Review System</h1>
-<% if(locals.user.isAdmin){ %> 
+<% if(locals.user.isAdmin){ %>
+    <div style="display: flex;flex-direction: row;justify-content: center;padding: 20px;">
+        <input id="serachBar" type="text" placeholder="Enter username" required>
+        <input type="submit"  value="Search" onclick="searchUser()">
+    </div> 
     <ul id="allUsers">
         <% for (let user of users){ %>
                 <% if(user.email != "admin@admin.com"){ %>
@@ -62,11 +66,36 @@
                                 Add Review/Update
                             </button>
                         </a>
-                        <a href="/users/delete/<%=user.id%>">
+                        <!-- <a href="/users/delete/<%=user.id%>">
                             <button type="button" class="btn btn-danger">
                                 Delete
                             </button>
-                        </a>
+                        </a> -->
+                        <!-- detele modal start-->
+                        <!-- Button trigger modal -->
+                        <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#<%= user.id+user.id %>">
+                            Delete
+                        </button>
+                        
+                            <!-- Modal -->
+                            <div class="modal fade" id="<%= user.id+user.id %>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                    <h1 class="modal-title fs-5" id="exampleModalLabel">Delete User</h1>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <p>Are you sure u want to delete <b><%= user.name %></b></p>
+                                    </div>
+                                    <div class="modal-footer">
+                                    <a href="/users/delete/<%=user.id%>"><button type="button" class="btn btn-danger" >Yes</button></a>
+                                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">No</button>
+                                    </div>
+                                </div>
+                                </div>
+                            </div>
+                        <!-- delete modal end -->
                     </li>
                  <% } %>
         <% } %>
@@ -94,3 +123,4 @@
         <% } %>
     </div>
 <% } %>
+<script type="text/javascript" src="/script/search_user.js"></script>

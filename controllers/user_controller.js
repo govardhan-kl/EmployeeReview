@@ -98,3 +98,11 @@ module.exports.deleteuser = async function(req,res){
     await PerformanceData.deleteMany({$or:[{ReviewBy:req.params.id},{ReviewTo:req.params.id}] })
     res.redirect('back')
 }
+
+
+module.exports.filterUsers = async function(req,res){
+    console.log(req.query.userName);
+    let data = await User.find({name: { $regex: new RegExp(req.query.userName, 'i') }});
+    console.log(data);
+    res.send(data);
+}
